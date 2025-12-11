@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MedCare - Centralized medication management platform for caregivers">
+    <title>MedCare - Medication Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <svg class="logo-icon" viewBox="0 0 40 40" fill="none">
+                        <circle cx="20" cy="20" r="18" fill="url(#logoGradient)" />
+                        <path d="M14 20h12M20 14v12" stroke="white" stroke-width="3" stroke-linecap="round" />
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0" y1="0" x2="40" y2="40">
+                                <stop offset="0%" stop-color="#667eea" />
+                                <stop offset="100%" stop-color="#764ba2" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="logo-text">MedCare</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12h18M3 6h18M3 18h18" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Profile Selector -->
+            <div class="profile-selector">
+                <div class="current-profile" id="currentProfile">
+                    <div class="profile-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2)">
+                        <span>+</span>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-name">Add Profile</span>
+                        <span class="profile-subtitle">Get started</span>
+                    </div>
+                    <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                </div>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="profile-list" id="profileList"></div>
+                    <button class="add-profile-btn" id="addProfileBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 8v8M8 12h8" />
+                        </svg>
+                        Add New Profile
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-view="dashboard">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="9" rx="1" />
+                        <rect x="14" y="3" width="7" height="5" rx="1" />
+                        <rect x="14" y="12" width="7" height="9" rx="1" />
+                        <rect x="3" y="16" width="7" height="5" rx="1" />
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-view="daily">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                        <path d="M16 2v4M8 2v4M3 10h18" />
+                        <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01" />
+                    </svg>
+                    <span>Daily View</span>
+                </a>
+                <a href="#" class="nav-item" data-view="medicines">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10.5 20.5L3.5 13.5a4.95 4.95 0 117 -7l7 7a4.95 4.95 0 11-7 7z" />
+                        <path d="M8.5 8.5l7 7" />
+                    </svg>
+                    <span>Medicines</span>
+                </a>
+                <a href="#" class="nav-item" data-view="calendar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                        <path d="M16 2v4M8 2v4M3 10h18" />
+                    </svg>
+                    <span>Calendar</span>
+                </a>
+                <a href="#" class="nav-item" data-view="reports">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 20V10M12 20V4M6 20v-6" />
+                    </svg>
+                    <span>Reports</span>
+                </a>
+                <a href="#" class="nav-item" data-view="chat">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                    </svg>
+                    <span>Chat</span>
+                    <span class="chat-badge" id="chatBadge">0</span>
+                </a>
+            </nav>
+
+            <!-- Quick Stats -->
+            <div class="sidebar-stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="todaysDoses">0</span>
+                    <span class="stat-label">Today's Doses</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="completedDoses">0</span>
+                    <span class="stat-label">Completed</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="page-title">
+                    <h1 id="pageTitle">Dashboard</h1>
+                    <p class="page-subtitle" id="pageSubtitle">Overview of all medications</p>
+                </div>
+                <div class="top-bar-actions">
+                    <button class="icon-btn" id="notificationBtn" aria-label="Notifications">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 8A6 6 0 106 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+                        </svg>
+                        <span class="notification-dot" id="notificationDot"></span>
+                    </button>
+                    <button class="icon-btn" id="settingsBtn" aria-label="Settings">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3" />
+                            <path
+                                d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
+                        </svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- View Container -->
+            <div class="view-container" id="viewContainer">
+                <!-- Dashboard View -->
+                <section class="view active" id="dashboardView">
+                    <div class="dashboard-grid">
+                        <!-- Next Up Card -->
+                        <div class="card next-up-card">
+                            <div class="card-header">
+                                <h2>Next Up</h2>
+                                <span class="time-badge" id="nextUpTime">--:--</span>
+                            </div>
+                            <div class="next-up-content" id="nextUpContent">
+                                <div class="empty-state">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M10.5 20.5L3.5 13.5a4.95 4.95 0 117 -7l7 7a4.95 4.95 0 11-7 7z" />
+                                        <path d="M8.5 8.5l7 7" />
+                                    </svg>
+                                    <p>No upcoming medications</p>
+                                    <span>Add a profile to get started</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Today's Schedule -->
+                        <div class="card schedule-card">
+                            <div class="card-header">
+                                <h2>Today's Schedule</h2>
+                                <button class="text-btn" id="viewAllSchedule">View All</button>
+                            </div>
+                            <div class="schedule-timeline" id="scheduleTimeline">
+                                <div class="empty-state small">
+                                    <p>No medications scheduled</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Compliance Overview -->
+                        <div class="card compliance-card">
+                            <div class="card-header">
+                                <h2>Weekly Compliance</h2>
+                            </div>
+                            <div class="compliance-chart" id="complianceChart">
+                                <canvas id="complianceCanvas"></canvas>
+                            </div>
+                            <div class="compliance-legend">
+                                <span class="legend-item"><span class="dot taken"></span>Taken</span>
+                                <span class="legend-item"><span class="dot missed"></span>Missed</span>
+                                <span class="legend-item"><span class="dot pending"></span>Pending</span>
+                            </div>
+                        </div>
+
+                        <!-- Active Profiles -->
+                        <div class="card profiles-card">
+                            <div class="card-header">
+                                <h2>Active Profiles</h2>
+                                <button class="icon-btn small" id="addProfileBtnDash" aria-label="Add profile">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <path d="M12 8v8M8 12h8" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="profiles-grid" id="profilesGrid">
+                                <div class="empty-state small">
+                                    <p>No profiles yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Daily View -->
+                <section class="view" id="dailyView">
+                    <div class="daily-header">
+                        <button class="nav-arrow" id="prevDay">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 18l-6-6 6-6" />
+                            </svg>
+                        </button>
+                        <div class="date-display">
+                            <h2 id="currentDateDisplay">Today</h2>
+                            <p id="fullDateDisplay">December 11, 2025</p>
+                        </div>
+                        <button class="nav-arrow" id="nextDay">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18l6-6-6-6" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="daily-list" id="dailyList">
+                        <div class="empty-state">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="4" width="18" height="18" rx="2" />
+                                <path d="M16 2v4M8 2v4M3 10h18" />
+                            </svg>
+                            <p>No medications for this day</p>
+                            <span>Add medicines to start tracking</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Medicines View -->
+                <section class="view" id="medicinesView">
+                    <div class="medicines-header">
+                        <div class="search-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="M21 21l-4.35-4.35" />
+                            </svg>
+                            <input type="text" id="medicineSearch" placeholder="Search medicines...">
+                        </div>
+                        <button class="primary-btn" id="addMedicineBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 5v14M5 12h14" />
+                            </svg>
+                            Add Medicine
+                        </button>
+                    </div>
+                    <div class="medicines-grid" id="medicinesGrid">
+                        <div class="empty-state">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M10.5 20.5L3.5 13.5a4.95 4.95 0 117 -7l7 7a4.95 4.95 0 11-7 7z" />
+                                <path d="M8.5 8.5l7 7" />
+                            </svg>
+                            <p>No medicines added</p>
+                            <span>Click "Add Medicine" to start</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Calendar View -->
+                <section class="view" id="calendarView">
+                    <div class="calendar-controls">
+                        <div class="view-toggle">
+                            <button class="toggle-btn active" data-cal-view="week">Week</button>
+                            <button class="toggle-btn" data-cal-view="month">Month</button>
+                        </div>
+                        <div class="calendar-nav">
+                            <button class="nav-arrow" id="calPrev">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M15 18l-6-6 6-6" />
+                                </svg>
+                            </button>
+                            <span id="calendarTitle">Week of Dec 11, 2025</span>
+                            <button class="nav-arrow" id="calNext">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 18l6-6-6-6" />
+                                </svg>
+                            </button>
+                        </div>
+                        <button class="text-btn" id="todayBtn">Today</button>
+                    </div>
+                    <div class="calendar-container" id="calendarContainer">
+                        <!-- Calendar grid will be rendered here -->
+                    </div>
+                </section>
+
+                <!-- Reports View -->
+                <section class="view" id="reportsView">
+                    <div class="reports-header">
+                        <div class="report-period">
+                            <button class="toggle-btn active" data-period="week">Weekly</button>
+                            <button class="toggle-btn" data-period="month">Monthly</button>
+                        </div>
+                        <button class="secondary-btn" id="exportReportBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                            </svg>
+                            Export
+                        </button>
+                    </div>
+                    <div class="reports-grid">
+                        <div class="card report-chart-card">
+                            <h3>Compliance Rate</h3>
+                            <canvas id="reportChart"></canvas>
+                        </div>
+                        <div class="card report-stats-card">
+                            <h3>Statistics</h3>
+                            <div class="stats-list" id="reportStats">
+                                <div class="stat-row">
+                                    <span>Total Doses</span>
+                                    <strong id="totalDoses">0</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Taken on Time</span>
+                                    <strong id="takenOnTime">0</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Taken Late</span>
+                                    <strong id="takenLate">0</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Missed</span>
+                                    <strong id="missedDoses">0</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card report-breakdown-card">
+                            <h3>Medicine Breakdown</h3>
+                            <div id="medicineBreakdown"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Chat View -->
+                <section class="view" id="chatView">
+                    <div class="chat-container">
+                        <div class="chat-sidebar">
+                            <h3>Care Team</h3>
+                            <div class="chat-contacts" id="chatContacts">
+                                <div class="empty-state small">
+                                    <p>No team members</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-main">
+                            <div class="chat-header" id="chatHeader">
+                                <span>Select a conversation</span>
+                            </div>
+                            <div class="chat-messages" id="chatMessages">
+                                <div class="empty-state">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path
+                                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                                    </svg>
+                                    <p>Start a conversation</p>
+                                    <span>Coordinate care with your team</span>
+                                </div>
+                            </div>
+                            <div class="chat-input">
+                                <input type="text" id="messageInput" placeholder="Type a message..." disabled>
+                                <button class="send-btn" id="sendMessageBtn" disabled>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- Profile Modal -->
+    <div class="modal" id="profileModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="profileModalTitle">Add Profile</h2>
+                <button class="close-btn" data-close-modal>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <form id="profileForm">
+                <div class="form-group">
+                    <label>Profile Photo</label>
+                    <div class="photo-upload">
+                        <div class="photo-preview" id="photoPreview">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+                        </div>
+                        <input type="file" id="profilePhoto" accept="image/*" hidden>
+                        <button type="button" class="secondary-btn" id="uploadPhotoBtn">Upload Photo</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="profileName">Name *</label>
+                    <input type="text" id="profileName" required placeholder="Enter patient name">
+                </div>
+                <div class="form-group">
+                    <label for="profileRelation">Relationship</label>
+                    <input type="text" id="profileRelation" placeholder="e.g., Mother, Father, Child">
+                </div>
+                <div class="form-group">
+                    <label>Profile Color</label>
+                    <div class="color-picker" id="colorPicker">
+                        <button type="button" class="color-option active" data-color="#667eea"
+                            style="background: linear-gradient(135deg, #667eea, #764ba2)"></button>
+                        <button type="button" class="color-option" data-color="#f093fb"
+                            style="background: linear-gradient(135deg, #f093fb, #f5576c)"></button>
+                        <button type="button" class="color-option" data-color="#4facfe"
+                            style="background: linear-gradient(135deg, #4facfe, #00f2fe)"></button>
+                        <button type="button" class="color-option" data-color="#43e97b"
+                            style="background: linear-gradient(135deg, #43e97b, #38f9d7)"></button>
+                        <button type="button" class="color-option" data-color="#fa709a"
+                            style="background: linear-gradient(135deg, #fa709a, #fee140)"></button>
+                        <button type="button" class="color-option" data-color="#a8edea"
+                            style="background: linear-gradient(135deg, #a8edea, #fed6e3)"></button>
+                        <button type="button" class="color-option" data-color="#ff9a9e"
+                            style="background: linear-gradient(135deg, #ff9a9e, #fecfef)"></button>
+                        <button type="button" class="color-option" data-color="#ffecd2"
+                            style="background: linear-gradient(135deg, #ffecd2, #fcb69f)"></button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="emergencyContact">Emergency Contact</label>
+                    <input type="tel" id="emergencyContact" placeholder="Phone number">
+                </div>
+                <div class="form-group">
+                    <label for="emergencyEmail">Emergency Email</label>
+                    <input type="email" id="emergencyEmail" placeholder="Email address">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="secondary-btn" data-close-modal>Cancel</button>
+                    <button type="submit" class="primary-btn">Save Profile</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Medicine Modal -->
+    <div class="modal" id="medicineModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="medicineModalTitle">Add Medicine</h2>
+                <button class="close-btn" data-close-modal>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <form id="medicineForm">
+                <div class="form-group">
+                    <label for="medicineName">Medicine Name *</label>
+                    <input type="text" id="medicineName" required placeholder="Enter medicine name">
+                </div>
+                <div class="form-group">
+                    <label>Type</label>
+                    <div class="pill-type-picker" id="pillTypePicker">
+                        <button type="button" class="pill-type active" data-type="tablet">
+                            <svg viewBox="0 0 32 32" fill="currentColor">
+                                <rect x="8" y="10" width="16" height="12" rx="6" />
+                            </svg>
+                            <span>Tablet</span>
+                        </button>
+                        <button type="button" class="pill-type" data-type="capsule">
+                            <svg viewBox="0 0 32 32" fill="currentColor">
+                                <rect x="6" y="12" width="20" height="8" rx="4" />
+                            </svg>
+                            <span>Capsule</span>
+                        </button>
+                        <button type="button" class="pill-type" data-type="liquid">
+                            <svg viewBox="0 0 32 32" fill="currentColor">
+                                <path d="M12 6h8v4l4 14a2 2 0 01-2 2H10a2 2 0 01-2-2l4-14V6z" />
+                            </svg>
+                            <span>Liquid</span>
+                        </button>
+                        <button type="button" class="pill-type" data-type="injection">
+                            <svg viewBox="0 0 32 32" fill="currentColor">
+                                <path d="M22 4l6 6-14 14-6-6 14-14zM8 24l-4 4" />
+                            </svg>
+                            <span>Injection</span>
+                        </button>
+                        <button type="button" class="pill-type" data-type="drops">
+                            <svg viewBox="0 0 32 32" fill="currentColor">
+                                <path d="M16 4c-4 6-8 10-8 14a8 8 0 1016 0c0-4-4-8-8-14z" />
+                            </svg>
+                            <span>Drops</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dosage">Dosage</label>
+                        <input type="text" id="dosage" placeholder="e.g., 500mg">
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="text" id="quantity" placeholder="e.g., 1 tablet">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Frequency</label>
+                    <div class="frequency-picker" id="frequencyPicker">
+                        <button type="button" class="freq-btn active" data-freq="once">Once Daily</button>
+                        <button type="button" class="freq-btn" data-freq="twice">Twice Daily</button>
+                        <button type="button" class="freq-btn" data-freq="thrice">3x Daily</button>
+                        <button type="button" class="freq-btn" data-freq="custom">Custom</button>
+                    </div>
+                </div>
+                <div class="form-group" id="timeSlotsGroup">
+                    <label>Schedule Times</label>
+                    <div class="time-slots" id="timeSlots">
+                        <div class="time-slot">
+                            <input type="time" class="time-input" value="08:00">
+                            <button type="button" class="remove-time" hidden>×</button>
+                        </div>
+                    </div>
+                    <button type="button" class="add-time-btn" id="addTimeBtn">+ Add Time</button>
+                </div>
+                <div class="form-group">
+                    <label>Reminder Settings</label>
+                    <div class="reminder-settings">
+                        <select id="reminderType">
+                            <option value="notification">Gentle Notification</option>
+                            <option value="alarm">Alarm Sound</option>
+                            <option value="vibration">Vibration Only</option>
+                            <option value="critical">Critical (Persistent)</option>
+                        </select>
+                        <select id="snoozeInterval">
+                            <option value="5">Snooze: 5 min</option>
+                            <option value="10" selected>Snooze: 10 min</option>
+                            <option value="15">Snooze: 15 min</option>
+                            <option value="30">Snooze: 30 min</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="isCritical">
+                        <span class="checkmark"></span>
+                        Mark as Critical Medicine
+                    </label>
+                    <p class="form-hint">Critical medicines trigger unstoppable alarms until confirmed</p>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <textarea id="notes" placeholder="Any special instructions..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="secondary-btn" data-close-modal>Cancel</button>
+                    <button type="submit" class="primary-btn">Save Medicine</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Snooze Modal -->
+    <div class="modal snooze-modal" id="snoozeModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content compact">
+            <div class="snooze-content">
+                <div class="snooze-icon" id="snoozeIcon"></div>
+                <h2 id="snoozeMedicineName">Medicine Name</h2>
+                <p id="snoozeTime">Scheduled for 8:00 AM</p>
+                <div class="snooze-actions">
+                    <button class="snooze-btn" data-snooze="5">5 min</button>
+                    <button class="snooze-btn" data-snooze="10">10 min</button>
+                    <button class="snooze-btn" data-snooze="15">15 min</button>
+                    <button class="snooze-btn" data-snooze="30">30 min</button>
+                </div>
+                <button class="primary-btn mark-done-btn" id="markDoneBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    Mark as Given
+                </button>
+                <button class="text-btn skip-btn" id="skipDoseBtn">Skip this dose</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="close-btn" data-close-modal>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="settings-content">
+                <div class="setting-group">
+                    <h3>Notifications</h3>
+                    <label class="switch-label">
+                        <span>Enable Notifications</span>
+                        <input type="checkbox" id="enableNotifications" checked>
+                        <span class="switch"></span>
+                    </label>
+                    <label class="switch-label">
+                        <span>Sound Alerts</span>
+                        <input type="checkbox" id="enableSound" checked>
+                        <span class="switch"></span>
+                    </label>
+                </div>
+                <div class="setting-group">
+                    <h3>Display</h3>
+                    <label class="switch-label">
+                        <span>Dark Mode</span>
+                        <input type="checkbox" id="darkMode" checked>
+                        <span class="switch"></span>
+                    </label>
+                </div>
+                <div class="setting-group">
+                    <h3>Data</h3>
+                    <button class="secondary-btn" id="exportDataBtn">Export All Data</button>
+                    <button class="secondary-btn" id="importDataBtn">Import Data</button>
+                    <input type="file" id="importFile" accept=".json" hidden>
+                    <button class="danger-btn" id="clearDataBtn">Clear All Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/profiles.js"></script>
+    <script src="js/medicines.js"></script>
+    <script src="js/schedule.js"></script>
+    <script src="js/reminders.js"></script>
+    <script src="js/calendar.js"></script>
+    <script src="js/reports.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
