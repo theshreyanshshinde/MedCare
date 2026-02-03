@@ -8,7 +8,7 @@ A centralized web application for caregivers to manage medication schedules acro
 - **Medicine Schedules** - Visual pill icons (tablet, capsule, liquid, injection, drops)
 - **Smart Reminders** - Escalating alerts: notification → alarm → emergency contact
 - **Daily To-Do View** - Track doses with one-tap mark as done
-- **Snooze Options** - 5/10/15/30 minute customizable intervals
+- **Snooze Options** - 5/10/15/30 minutes customizable intervals
 - **Calendar Views** - Weekly & monthly views with drag-and-drop rescheduling
 - **Compliance Reports** - Visual charts showing weekly/monthly adherence
 - **Care Team Chat** - In-app messaging for coordination
@@ -16,7 +16,7 @@ A centralized web application for caregivers to manage medication schedules acro
 
 ## 🚀 Quick Start
 
-1. Open [index.html](cci:7://file:///d:/temp/Antigravity/medcare/index.html:0:0-0:0) in Chrome
+1. Open [index.html](./index.html) in Chrome
 2. Create a patient profile
 3. Add medicines with schedules
 4. Get reminded at scheduled times!
